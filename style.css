@@ -1,0 +1,902 @@
+﻿/* ============================================================
+   HAPPY GIRLFRIEND DAY — style.css  (v2 — upgraded design)
+
+   TABLE OF CONTENTS:
+   1. CSS Variables
+   2. Reset & Base
+   3. Typography
+   4. Layout & Container
+   5. Hero Section
+   6. Floating Hearts
+   7. Shared Section Styles & Dividers
+   8. Introduction Section
+   9. Reasons / Cards Section
+   10. Timeline Section
+   11. Letter Section
+   12. Interactive Button Section
+   13. Toast / Popup
+   14. Closing Section
+   15. Reveal Animations
+   16. Responsive
+   ============================================================ */
+
+
+/* ============================================================
+   1. CSS VARIABLES
+   ============================================================ */
+:root {
+  /* Colors */
+  --color-bg:           #faf7f4;
+  --color-bg-alt:       #f4efe9;
+  --color-accent:       #b87265;
+  --color-accent-hover: #a0604f;
+  --color-accent-soft:  #e2bdb6;
+  --color-accent-pale:  #f5e9e6;
+  --color-text:         #251e1b;
+  --color-text-muted:   #9a837c;
+  --color-text-light:   #c4aaa4;
+  --color-border:       #e8ddd8;
+  --color-border-soft:  #f0e8e4;
+  --color-card:         #ffffff;
+  --color-card-warm:    #fffbf9;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  8rem;
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  14px;
+  --radius-lg:  24px;
+  --radius-xl:  36px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 4px rgba(37, 30, 27, 0.06);
+  --shadow-md:  0 4px 20px rgba(37, 30, 27, 0.08);
+  --shadow-lg:  0 12px 40px rgba(37, 30, 27, 0.1);
+  --shadow-accent: 0 8px 28px rgba(184, 114, 101, 0.22);
+
+  /* Transitions */
+  --ease-fast: 0.18s ease;
+  --ease-mid:  0.35s ease;
+  --ease-slow: 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+
+/* ============================================================
+   3. TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+p { line-height: 1.82; }
+
+
+/* ============================================================
+   4. LAYOUT & CONTAINER
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: var(--space-xl) 0;
+  position: relative;
+}
+
+/* Alternating background */
+.section:nth-child(even) {
+  background-color: var(--color-bg-alt);
+}
+
+
+/* ============================================================
+   5. HERO SECTION
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+/* Subtle vignette at bottom */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--color-bg));
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Top ornament */
+.hero__ornament {
+  font-size: 1.1rem;
+  color: var(--color-accent-soft);
+  letter-spacing: 0.4em;
+  margin-bottom: 1.75rem;
+  display: block;
+  animation: heroFadeIn 1s ease 0.2s both;
+}
+
+.hero__label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.2rem;
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  font-weight: 400;
+  color: var(--color-text);
+  max-width: 560px;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.hero__divider {
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-accent-soft);
+  margin: 0.25rem auto 1.5rem;
+  display: block;
+}
+
+.hero__sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+  color: var(--color-text-muted);
+  max-width: 400px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.btn-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background-color: var(--color-accent);
+  border-radius: 50px;
+  transition: background-color var(--ease-fast), transform var(--ease-fast), box-shadow var(--ease-fast);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn-open:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(184, 114, 101, 0.3);
+}
+
+.btn-open:active {
+  transform: translateY(-1px);
+}
+
+/* Scroll indicator below button */
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  animation: bounceDown 2s ease infinite 2s;
+  opacity: 0.4;
+}
+
+.hero__scroll-hint span {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.hero__scroll-hint svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--color-text-muted);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(5px); }
+}
+
+
+/* ============================================================
+   6. FLOATING HEARTS
+   ============================================================ */
+.hearts-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -40px;
+  color: var(--color-accent-soft);
+  opacity: 0;
+  animation: floatUp linear infinite;
+  user-select: none;
+  line-height: 1;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(-10deg) scale(0.8);
+  }
+  10% { opacity: 0.55; }
+  80% { opacity: 0.2; }
+  100% {
+    opacity: 0;
+    transform: translateY(-110vh) rotate(10deg) scale(1.1);
+  }
+}
+
+
+/* ============================================================
+   7. SHARED SECTION STYLES & DECORATIVE DIVIDERS
+   ============================================================ */
+.section__eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.6rem;
+}
+
+.section__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+/* Thin decorative line under titles */
+.section__title-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background-color: var(--color-accent-soft);
+  margin: 0.75rem 0 2rem;
+}
+
+
+/* ============================================================
+   8. INTRODUCTION SECTION
+   ============================================================ */
+.intro__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.intro__text p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.08rem, 2.4vw, 1.22rem);
+  line-height: 1.92;
+  color: var(--color-text);
+}
+
+.intro__text p:first-child {
+  font-size: clamp(1.15rem, 2.6vw, 1.3rem);
+  color: var(--color-text);
+}
+
+/* Decorative quote mark */
+.intro__quote-mark {
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  line-height: 0.5;
+  color: var(--color-accent-soft);
+  display: block;
+  margin-bottom: 1.5rem;
+  user-select: none;
+}
+
+
+/* ============================================================
+   9. REASONS / CARDS SECTION
+   ============================================================ */
+.reasons__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.reason-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  transition:
+    transform var(--ease-mid),
+    box-shadow var(--ease-mid),
+    border-color var(--ease-mid),
+    background-color var(--ease-mid);
+  box-shadow: var(--shadow-sm);
+}
+
+.reason-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent-soft);
+  background-color: var(--color-card-warm);
+}
+
+.reason-card__num {
+  flex-shrink: 0;
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--color-accent);
+  opacity: 0.7;
+  margin-top: 0.15rem;
+  min-width: 1.5rem;
+  line-height: 1.8;
+}
+
+.reason-card p {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+
+/* ============================================================
+   10. TIMELINE SECTION
+   ============================================================ */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin-top: 0.5rem;
+}
+
+/* Vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.28rem;
+  top: 0.5rem;
+  bottom: 1.5rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent-soft) 0%,
+    var(--color-border-soft) 70%,
+    transparent 100%
+  );
+}
+
+.timeline__item {
+  position: relative;
+  padding-bottom: 2.25rem;
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline__dot {
+  position: absolute;
+  left: -2rem;
+  top: 0.4rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  border: 2px solid var(--color-bg-alt);
+  box-shadow: 0 0 0 3px var(--color-accent-pale);
+  transition: transform var(--ease-fast), background-color var(--ease-fast);
+}
+
+.timeline__item:last-child .timeline__dot {
+  background-color: var(--color-text);
+  box-shadow: 0 0 0 3px rgba(37, 30, 27, 0.07);
+}
+
+.timeline__item:hover .timeline__dot {
+  transform: scale(1.3);
+}
+
+.timeline__label {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.3rem;
+  line-height: 1.35;
+}
+
+.timeline__item:last-child .timeline__label {
+  color: var(--color-accent);
+}
+
+.timeline__desc {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+
+/* ============================================================
+   11. LETTER SECTION
+   ============================================================ */
+.letter-section {
+  background-color: var(--color-bg-alt) !important;
+}
+
+.letter-section .section__title {
+  font-style: italic;
+}
+
+.letter-card {
+  position: relative;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.75rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  box-shadow: var(--shadow-md);
+
+  /* Subtle ruled-paper texture */
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent calc(1.82em * 1.3 - 1px),
+      rgba(184, 114, 101, 0.055) calc(1.82em * 1.3 - 1px),
+      rgba(184, 114, 101, 0.055) calc(1.82em * 1.3)
+    );
+  background-size: 100% calc(1.82em * 1.3);
+}
+
+/* Red margin line on the left (like real paper) */
+.letter-card::before {
+  content: '';
+  position: absolute;
+  left: 2.4rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: rgba(184, 114, 101, 0.12);
+  border-radius: 1px;
+}
+
+.letter__salutation {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.letter-card p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.02rem, 2.3vw, 1.12rem);
+  line-height: 1.92;
+  color: var(--color-text);
+  padding-left: 1.75rem;
+}
+
+.letter__salutation {
+  padding-left: 1.75rem;
+}
+
+.letter__closing {
+  margin-top: 0.4rem;
+  line-height: 1.9;
+}
+
+.letter__signature {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin-top: 0.25rem;
+  padding-left: 1.75rem;
+}
+
+
+/* ============================================================
+   12. INTERACTIVE BUTTON SECTION
+   ============================================================ */
+.interactive-section {
+  text-align: center;
+  overflow: visible;
+}
+
+.interactive__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.interactive__hint {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+}
+
+.btn-love {
+  position: relative;
+  padding: 1.05rem 2.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent);
+  background-color: transparent;
+  border: 1.5px solid var(--color-accent-soft);
+  border-radius: 50px;
+  transition:
+    background-color var(--ease-fast),
+    color var(--ease-fast),
+    border-color var(--ease-fast),
+    transform var(--ease-fast),
+    box-shadow var(--ease-fast);
+  letter-spacing: 0.01em;
+}
+
+.btn-love:hover {
+  background-color: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  transform: scale(1.04);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn-love:active {
+  transform: scale(0.97);
+}
+
+/* Floating hearts from click */
+.click-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.click-heart {
+  position: absolute;
+  pointer-events: none;
+  animation: clickHeartFloat 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  user-select: none;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+@keyframes clickHeartFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  60% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-180px) scale(0.4) rotate(15deg);
+  }
+}
+
+
+/* ============================================================
+   13. TOAST / POPUP
+   ============================================================ */
+.toast {
+  position: fixed;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--ease-mid),
+    transform var(--ease-slow);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast__icon {
+  font-size: 1rem;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+
+/* ============================================================
+   14. CLOSING SECTION
+   ============================================================ */
+.closing {
+  text-align: center;
+  background-color: var(--color-bg) !important;
+  overflow: hidden;
+}
+
+/* Large decorative background text */
+.closing::before {
+  content: '♡';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28rem;
+  color: var(--color-accent-soft);
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+.closing__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.closing__ornament {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--color-accent);
+  opacity: 0.6;
+  letter-spacing: 0.5em;
+  margin-bottom: 0.5rem;
+}
+
+.closing__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  font-weight: 400;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.closing__sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.18rem);
+  color: var(--color-text-muted);
+  max-width: 360px;
+  line-height: 1.8;
+  margin-top: 0.25rem;
+}
+
+.closing__rule {
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-accent-soft);
+  margin: 0.5rem auto;
+  display: block;
+}
+
+.closing__credit {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-top: 0.5rem;
+}
+
+
+/* ============================================================
+   15. REVEAL ANIMATIONS
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger for reason cards */
+.reasons__grid .reveal:nth-child(1) { transition-delay: 0s; }
+.reasons__grid .reveal:nth-child(2) { transition-delay: 0.07s; }
+.reasons__grid .reveal:nth-child(3) { transition-delay: 0.14s; }
+.reasons__grid .reveal:nth-child(4) { transition-delay: 0.21s; }
+.reasons__grid .reveal:nth-child(5) { transition-delay: 0.28s; }
+.reasons__grid .reveal:nth-child(6) { transition-delay: 0.35s; }
+
+/* Stagger for timeline */
+.timeline__item:nth-child(1) { transition-delay: 0s; }
+.timeline__item:nth-child(2) { transition-delay: 0.1s; }
+.timeline__item:nth-child(3) { transition-delay: 0.2s; }
+.timeline__item:nth-child(4) { transition-delay: 0.3s; }
+
+
+/* ============================================================
+   HERO ANIMATION
+   ============================================================ */
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet: 2-column cards */
+@media (min-width: 580px) {
+  .reasons__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Desktop: wider container on letter/intro */
+@media (min-width: 900px) {
+  .container {
+    padding: 0 1rem;
+  }
+  .letter-card {
+    padding: 3.5rem 3.5rem 3rem;
+  }
+  .letter-card::before {
+    left: 3.2rem;
+  }
+  .letter-card p,
+  .letter__salutation,
+  .letter__signature {
+    padding-left: 2.75rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .hero__title {
+    font-size: 1.9rem;
+  }
+  .btn-open {
+    padding: 0.8rem 1.8rem;
+    font-size: 0.84rem;
+  }
+  .letter-card {
+    padding: 2rem 1.4rem 1.75rem;
+  }
+  .letter-card::before {
+    left: 1.1rem;
+  }
+  .letter-card p,
+  .letter__salutation,
+  .letter__signature {
+    padding-left: 1rem;
+  }
+  .toast {
+    white-space: normal;
+    text-align: center;
+    max-width: calc(100vw - 2.5rem);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem 1.25rem;
+  }
+}
